@@ -3,13 +3,15 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const User = require('../UserScheme');
 
-router.get("/sign-up", (req, res) => res.render("sign-up-form", {validate: true}));
+
+router.get("/sign-up", (req, res) => res.render("sign-up-form", {validate: true, user: req.user, data_messages: null, member: null, admin: null}));
+
 
 router.post("/sign-up", (req, res, next) => {
 
   // Password confirmation
   if(req.body.password !== req.body.passwordConfirmation){
-    res.render("sign-up-form", {validate: false})
+    res.render("sign-up-form", {validate: true, user: req.user, data_messages: null, member: null, admin: null })
     return
   };
 
@@ -36,13 +38,14 @@ router.post("/sign-up", (req, res, next) => {
     user.save((err) => {
       if (err) return next(err);
     });
-    res.render("index");
+    res.redirect("/");
     
 
   });
 });
 
-router.get("/joinClub", (req, res) => res.render("joinClub", {completed: false, user: req.user}));
+
+router.get("/joinClub", (req, res) => res.render("joinClub", {completed: false, user: req.user, data_messages: null, member: null, admin: null}));
 
 
 router.post("/joinClub", (req, res) => {
@@ -66,8 +69,9 @@ router.post("/joinClub", (req, res) => {
     res.redirect('/');
   };
 
-  res.render("joinClub", {completed: true, user: req.user});
+  res.render("joinClub", {completed: true, user: req.user, data_messages: null, member: null, admin: null});
 
 });
+
 
 module.exports = router;

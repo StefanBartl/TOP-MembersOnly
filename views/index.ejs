@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="theme_prime">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link
-  rel="icon" sizes="16x16" href="../images/dev_logo.png"/>
-  <title>WKD || TOP-Members Only</title>
-</head>
-<body>
-  <h1>The Club - WKD messageboard</h1>
+<%- include('head') -%>
   <% if (user) {%>
     <div class="wrapper">
 
@@ -76,12 +66,6 @@
     <% } else { %>
       <h2>NO MESSAGES STORED</h2>
     <%}%>
-    <% if (member === false) {%>
-    <div class="joinMember_ho">
-      <h2>Want be a member of the 'The special messageboard-club'?</h2>
-      <p>(...to see author and date of the messages along to all other club benefits.) </p>
-      <button onclick="location.href='/users/joinClub'">Join with code</button>
-    </div>
-    <%}%>
+    <%- include('joinClubWrapper') -%>
 </body>
 </html>

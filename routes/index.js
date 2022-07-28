@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const Messages = require('../MessageScheme');
 
-/* GET home page. */
+
 router.get("/", (req, res) => {
 
   // get user
@@ -20,6 +20,7 @@ router.get("/", (req, res) => {
 
 });
 
+
 router.post('/deleteMessage', (req, res) => {
 
     Messages.findByIdAndDelete({_id: req.body.messageID}, (err, data) => {
@@ -27,7 +28,8 @@ router.post('/deleteMessage', (req, res) => {
       res.redirect('/');    
     });
 
-})
+});
+
 
 router.post('/newMessage', (req, res) => {
 
@@ -51,7 +53,8 @@ router.post('/newMessage', (req, res) => {
 
   res.redirect("/");
 
-})
+});
+
 
 router.post(
   "/log-in",
@@ -61,6 +64,7 @@ router.post(
   })
 );
 
+
 router.get("/log-out", (req, res) => {
   req.logout(function (err) {
     if (err) {
@@ -69,5 +73,6 @@ router.get("/log-out", (req, res) => {
     res.redirect("/");
   });
 });
+
 
 module.exports = router;

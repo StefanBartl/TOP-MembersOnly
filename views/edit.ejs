@@ -1,0 +1,32 @@
+<%- include('head') -%>
+
+<% if (data_messages) {%>
+    <div class="messages__wrapper">
+      <h2>Messageboard</h2>
+      <% for(let count = 0; count < data_messages.length || 0; count++ ){ %>
+      <div class="message">
+        <div class="messagesIDWrapper">
+          <p class="messageIDLabel">ID:</p>
+          <p class="messageIDP"><%= data_messages[count]._id%>
+        </div>
+        <p class="messageP"><strong>MSG:</strong> <%= data_messages[count].message%>
+          <% if (data_messages) {%>
+            <% if (member === true || admin === true) {%>
+              <p class="messageAuthor">Author: <%= data_messages[count].author%>
+              <p class="messageDate">Date: <%= data_messages[count].date%>
+            <%}%>
+          <%}%>
+        </div>
+      <% } %> 
+    </div>
+      <div class="delete_div">
+        <h2>Want to delete a message?</h2>
+        <form action="/deleteMessage" method="POST">
+          <label for="messageID">Enter message id:</label>
+          <input name="messageID" type="text"/>
+          <button name="deleteBtn" class="deleteMessageBtn" >Delete message</button>
+        </form>
+      </div>
+
+  </body>
+</html>
