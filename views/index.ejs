@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="theme_prime">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link
+  rel="icon" sizes="16x16" href="../images/dev_logo.png"/>
+  <title>WKD || TOP-Members Only</title>
+</head>
+<body>
+  <h1>The Club - WKD messageboard</h1>
+  <% if (user) {%>
+    <div class="wrapper">
+
+      <div class="user_welcome">
+        <h2>Welcome back, <%= user.username %></h2>
+        <a href="/log-out">LOG OUT</a>
+      </div>
+
+      <div class="user_message">
+          <form action="/newMessage" method="POST" class="newMessage">
+            <h2>Create a new message</h2>
+            <textarea name="message" type="textfield" rows="4" cols="50"></textarea>
+            <button>Send</button>
+          </form>
+      </div>
+    </div>
+  <% } else { %>
+    <form action="/log-in" method="POST" class="login_form">
+      <h2>Log in</h2>
+      <div class="login_name_div">
+        <label for="username">Username</label>
+        <input name="username" placeholder="username" type="text" />
+      </div>
+      <div class="login_pw_div">
+        <label for="password">Password</label>
+        <input name="password" type="password" />
+      </div>
+      <button>Log In</button>
+    </form> 
+    <div class="redirectSignUp">
+      <h3 class="signUpBtn-h2">Don't have an account?</h3>
+      <button onclick="window.location.href='/users/sign-up'" class="signUp-Btn">Sign-Up</button> 
+    </div>
+  <%}%>
+    <% if (data_messages) {%>
+        <div class="messages__wrapper">
+          <h2>Messageboard</h2>
+          <% for(let count = 0; count < data_messages.length || 0; count++ ){ %>
+          <div class="message">
+            <div class="messagesIDWrapper">
+              <p class="messageIDLabel">ID:</p>
+              <p class="messageIDP"><%= data_messages[count]._id%>
+            </div>
+            <p class="messageP"><strong>MSG:</strong> <%= data_messages[count].message%>
+              <% if (data_messages) {%>
+                <% if (member === true || admin === true) {%>
+                  <p class="messageAuthor">Author: <%= data_messages[count].author%>
+                  <p class="messageDate">Date: <%= data_messages[count].date%>
+                <%}%>
+              <%}%>
+            </div>
+          <% } %> 
+        </div>
+        <!--  if user is admin, enable delete button-->
+        <% if (admin === true) {%>
+          <div class="delete_div">
+            <h2>Want to delete a message?</h2>
+            <form action="/deleteMessage" method="POST">
+              <label for="messageID">Enter message id:</label>
+              <input name="messageID" type="text"/>
+              <button name="deleteBtn" class="deleteMessageBtn" >Delete message</button>
+            </form>
+          </div>
+      <%}%>
+    <% } else { %>
+      <h2>NO MESSAGES STORED</h2>
+    <%}%>
+    <% if (member === false) {%>
+    <div class="joinMember_ho">
+      <h2>Want be a member of the 'The special messageboard-club'?</h2>
+      <p>(...to see author and date of the messages along to all other club benefits.) </p>
+      <button onclick="location.href='/users/joinClub'">Join with code</button>
+    </div>
+    <%}%>
+</body>
+</html>

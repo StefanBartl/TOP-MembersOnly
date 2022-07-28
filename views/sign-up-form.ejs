@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="theme_prime">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link
+  rel="icon" sizes="16x16" href="../images/dev_logo.png"/>
+  <title>WKD || TOP-Members Only</title>
+</head>
+<body>
+  <h1>The Club - WKD messageboard</h1>
+  <form action="/users/sign-up" method="POST" class="signup_form">
+    <h2>Sign Up</h2>
+    <label for="username">Username</label>
+    <input name="username" type="text" />
+    <label for="password">Password</label>
+    <input name="password" type="password" />
+    <label for="password">Confirm Password</label>
+    <% if (validate === false) {%>
+      <input name="passwordConfirmation" type="password" minlength="5" maxlength="20" title="Length: 5-20" placeholder="Not valid!" style="border-color: red;" required/>
+    <% } else { %>
+      <input name="passwordConfirmation" type="password" minlength="5" maxlength="20" title="Length: 5-20" required/>
+    <%}%>
+    <label for="secret">Membership code (not required)</label>
+    <input name="secret" type="password" />
+    <button>Sign Up</button>
+
+  </form>
+</body>
+</html>

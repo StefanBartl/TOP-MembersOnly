@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" class="theme_prime">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link
+  rel="icon" sizes="16x16" href="../images/dev_logo.png"/>
+  <title>WKD || TOP-Members Only</title>
+</head>
+<body>
+  <h1>The Club - WKD messageboard</h1>
+  <% if (completed) {%>
+    <h2>Sorry, username or code(s) not correct.</h2>
+  <%}%>
+  <% if (user) {%>
+    <form action="/users/joinClub" method="POST" class="joinClub">
+      <h1>Want to enter the club?</h1>
+      <label for="username">Username</label>
+      <input name="username" type="text" />
+      <label for="password">Membercode</label>
+      <input name="tryJoinClub" type="password" />
+      <h1>Want to be admin?</h1>
+      <label for="password">Admincode</label>
+      <input name="tryJoinAdmin" type="password" />
+      <button>Try join...</button>
+    </form>
+    <% } else { %>
+      <div class="redirectSignUp">
+        <h3 class="signUpBtn-h2">Please login or sign up first before join the club!</h3>
+        <button onclick="window.location.href='/'" class="signUp-Btn">Login</button> 
+        <button onclick="window.location.href='/users/sign-up'" class="signUp-Btn">Sign-Up</button> 
+      </div>
+  <%}%>
+
+</body>
+</html>
